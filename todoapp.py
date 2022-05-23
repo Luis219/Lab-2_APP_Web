@@ -9,16 +9,26 @@ from flask import Flask, abort, render_template
 #variable de instancia app
 app=Flask(__name__, template_folder='templates')
 
-#Ruta raíz
+#Ruta raíz- página inicio
 @app.route('/')
-
-#Ruta página de inicio html
-@app.route('/inicio')
 
 #función que retorna la página
 def inicio():
     return render_template('inicio.html')
 
+#Ruta raíz- página enviar
+@app.route('/enviar')
+
+#función que retorna la página enviar
+def inicio():
+    return render_template('enviar.html')
+
+#Ruta raíz- página borrar
+@app.route('/enviar')
+
+#función que retorna la página borrar
+def inicio():
+    return render_template('borrar.html')
 
 
 #función principal
