@@ -23,26 +23,26 @@
         <tbody>
           <tr>
             <th scope="row">1</th>
-            <td>Comprar</td>
-            <td>user@gmail.com</td>
-            <td>media</td>
+            <td>{{tarea}}</td>
+            <td>{{correo}}</td>
+            <td>{{prioridad}}</td>
           </tr>
           
         </tbody>
       </table>
 
       <h2>Formulario Nuevo elemento</h2>
-      <form>
+      <form method="POST" action="{{url_for('enviar')}}">
         <div class="form-row">
             <div class="form-group col-md-6">
                 <label for="inputName">Tarea</label>
-                <input type="text" class="form-control"  id="inputName"placeholder="Tarea">
+                <input type="text" class="form-control"  name="tarea" id="inputName"placeholder="Tarea">
               </div>
             </div>
       <div class="form-row">   
           <div class="form-group col-md-6">
-            <label for="inputEmail4">Email</label>
-            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
+            <label for="inputEmail4">Correo electrónico</label>
+            <input type="email" class="form-control" name="correo" id="inputEmail4" placeholder="Correo electrónico">
           </div>
         </div>
 
@@ -51,8 +51,8 @@
         <div class="form-row">
         
           <div class="form-group col-md-4">
-            <label for="inputState">Prioridad</label>
-            <select id="inputState" class="form-control">
+            <label for="inputPrioridad">Prioridad</label>
+            <select id="inputPrioridad" name="prioridad" class="form-control">
               <option selected>Baja</option>
               <option>Media</option>
               <option>Alta</option>
@@ -61,6 +61,12 @@
           
         </div>
         <button type="submit" class="btn btn-primary">Agregar a la tarea</button>
+      </form>
+
+      <form method="POST" action="{{url_for('borrar')}}" >
+
+        <button type="submit" class="btn btn-primary">Borrar</button>
+
       </form>
 
 </body>
