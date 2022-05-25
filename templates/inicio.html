@@ -14,18 +14,50 @@
     <table class="table table-hover table-dark">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            
             <th scope="col">Tarea</th>
             <th scope="col">Correo</th>
             <th scope="col">Prioridad</th>
           </tr>
         </thead>
         <tbody>
+        
           <tr>
-            <th scope="row">1</th>
-            <td>{{tarea}}</td>
-            <td>{{correo}}</td>
-            <td>{{prioridad}}</td>
+           
+          
+        
+       
+
+            <td>
+              <u>   {% for tarea  in tareas %}
+                <li>
+                  {{tarea}}
+                </li>
+                {% endfor %}
+              </u>
+            </td>
+
+            <td>
+              <u>
+                {% for correo  in correos %}
+                <li>
+                  {{correo}}
+                </li>
+                {% endfor %}
+              </u>
+            </td>
+
+
+            <td>
+              <u>
+                {% for prioridad  in prioridades %}
+                <li>
+                  {{prioridad}}
+                </li>
+                {% endfor %}
+              </u>
+            </td>
+
           </tr>
           
         </tbody>
@@ -62,6 +94,8 @@
         </div>
         <button type="submit" class="btn btn-primary">Agregar a la tarea</button>
       </form>
+      <br>
+      <br>
 
       <form method="POST" action="{{url_for('borrar')}}" >
 
