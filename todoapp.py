@@ -101,7 +101,7 @@ def guardar():
 
     return render_template('guardar.html')
 
-
+#ruta hacia /ver_datos
 @app.route('/ver_datos',methods=['POST'])
 
 #función que permite visualizar las tareas almacenadas
@@ -109,7 +109,7 @@ def ver_datos():
     
     path, _=os.path.split(os.path.abspath(__file__))
     
-   #se carga el archuvo datos.json
+   #se carga el archivo datos.json
     with open(path+'/datos.json') as file:
        data= json.load(file)
     
