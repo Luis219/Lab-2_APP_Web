@@ -1,107 +1,139 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Inicio</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio</title>
 </head>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <body>
+  
 
-    <h2>Lista de Tareas Pendientes</h2>
-    <table class="table table-hover table-dark">
-        <thead>
-          <tr>
-            
-            <th scope="col">Tarea</th>
-            <th scope="col">Correo</th>
-            <th scope="col">Prioridad</th>
-          </tr>
-        </thead>
-        <tbody>
+
+  <!--Alerta en el caso de existir errores en el ingreso de los datos-->
+
+  
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    <ul class="alert alert-warning" role="alert">
+      {% for message in messages %}
+      <li >{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
+
+  
+
+
+  <!-- Formulario de ingreso de tareas-->
+  <h2 class="row justify-content-center align-items-center minh-100">Formulario Nuevo elemento</h2>
+  <form method="POST" action="{{url_for('enviar')}}">
+    <div class="form-row row justify-content-center align-items-center minh-100">
+      <div class="form-group col-md-6">
+        <label for="inputName">Tarea</label>
+        <input type="text" class="form-control" name="tarea" id="inputName" placeholder="Tarea">
+      </div>
+    </div>
+    <div class="form-row row justify-content-center align-items-center minh-100">
+      <div class="form-group col-md-6">
+        <label for="inputEmail4">Correo electrónico</label>
+        <input type="email" class="form-control" name="correo" id="inputEmail4" placeholder="Correo electrónico">
+      </div>
+    </div>
+
+    <div class="form-row row justify-content-center align-items-center minh-100">
+
+      <div class="form-group col-md-4">
+        <label for="inputPrioridad">Prioridad</label>
+        <select id="inputPrioridad" name="prioridad" class="form-control">
+          <option selected>Baja</option>
+          <option>Media</option>
+          <option>Alta</option>
+        </select>
+      </div>
+
+    </div>
+    <center>
+      <button type="submit" class="btn btn-primary minh-100">Agregar a la tarea</button>
+    </center>
+    
+  </form>
+  <br>
+  <br>
+
+<!--Boton borrar-->
+  <form method="POST" action="{{url_for('borrar')}}" class="row justify-content-center align-items-center minh-100">
+
+    <button type="submit" class="btn btn-primary ">Borrar</button>
+
+  </form>
+  <br>
+  <br>
+  <form method="POST" action="{{url_for('guardar')}}" class="row justify-content-center align-items-center minh-100">
+
+    <button type="submit" class="btn btn-primary center">Guardar</button>
+
+  </form>
+  <br>
+  <br>
+  <!-- Tabla de tareas pendientes-->
+  <h2>Lista de Tareas Pendientes</h2>
+  <table class="table table-hover table-dark ">
+    <thead>
+      <tr>
+
+        <th scope="col">Tarea</th>
+        <th scope="col">Correo</th>
+        <th scope="col">Prioridad</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+
+
+        <td>
+          <u> {% for tarea in tareas %}
+            <li>
+              {{tarea}}
+            </li>
+            {% endfor %}
+          </u>
+        </td>
+
+        <td>
+          <u>
+            {% for correo in correos %}
+            <li>
+              {{correo}}
+            </li>
+            {% endfor %}
+          </u>
+        </td>
+
+
+        <td>
+          <u>
+            {% for prioridad in prioridades %}
+            <li>
+              {{prioridad}}
+            </li>
+            {% endfor %}
+          </u>
+        </td>
         
-          <tr>
-           
-          
-        
-       
 
-            <td>
-              <u>   {% for tarea  in tareas %}
-                <li>
-                  {{tarea}}
-                </li>
-                {% endfor %}
-              </u>
-            </td>
+      </tr>
 
-            <td>
-              <u>
-                {% for correo  in correos %}
-                <li>
-                  {{correo}}
-                </li>
-                {% endfor %}
-              </u>
-            </td>
+    </tbody>
+  </table>
 
-
-            <td>
-              <u>
-                {% for prioridad  in prioridades %}
-                <li>
-                  {{prioridad}}
-                </li>
-                {% endfor %}
-              </u>
-            </td>
-
-          </tr>
-          
-        </tbody>
-      </table>
-
-      <h2>Formulario Nuevo elemento</h2>
-      <form method="POST" action="{{url_for('enviar')}}">
-        <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="inputName">Tarea</label>
-                <input type="text" class="form-control"  name="tarea" id="inputName"placeholder="Tarea">
-              </div>
-            </div>
-      <div class="form-row">   
-          <div class="form-group col-md-6">
-            <label for="inputEmail4">Correo electrónico</label>
-            <input type="email" class="form-control" name="correo" id="inputEmail4" placeholder="Correo electrónico">
-          </div>
-        </div>
-
-        
-        
-        <div class="form-row">
-        
-          <div class="form-group col-md-4">
-            <label for="inputPrioridad">Prioridad</label>
-            <select id="inputPrioridad" name="prioridad" class="form-control">
-              <option selected>Baja</option>
-              <option>Media</option>
-              <option>Alta</option>
-            </select>
-          </div>
-          
-        </div>
-        <button type="submit" class="btn btn-primary">Agregar a la tarea</button>
-      </form>
-      <br>
-      <br>
-
-      <form method="POST" action="{{url_for('borrar')}}" >
-
-        <button type="submit" class="btn btn-primary">Borrar</button>
-
-      </form>
 
 </body>
+
 </html>

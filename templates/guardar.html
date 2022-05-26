@@ -1,0 +1,68 @@
+ <!DOCTYPE html>
+ <html lang="en">
+ <head>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Guardar Datos</title>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+ </head>
+ <body>
+   <!-- Formulario de ingreso de tareas-->
+ <h2>Formulario Nuevo elemento</h2>
+ <form method="POST" action="{{url_for('guardar')}}">
+   <div class="form-row">
+     <div class="form-group col-md-6">
+       <label for="inputName">Tarea</label>
+       <input type="text" class="form-control" name="tarea" id="inputName" placeholder="Tarea">
+     </div>
+   </div>
+   <div class="form-row">
+     <div class="form-group col-md-6">
+       <label for="inputEmail4">Correo electrónico</label>
+       <input type="email" class="form-control" name="correo" id="inputEmail4" placeholder="Correo electrónico">
+     </div>
+   </div>
+
+   <div class="form-row">
+
+     <div class="form-group col-md-4">
+       <label for="inputPrioridad">Prioridad</label>
+       <select id="inputPrioridad" name="prioridad" class="form-control">
+         <option selected>Baja</option>
+         <option>Media</option>
+         <option>Alta</option>
+       </select>
+     </div>
+
+   </div>
+   <button type="submit" class="btn btn-primary">Guardar datos</button>
+ </form>
+ <br>
+ <br>
+ <form method="POST" action="{{url_for('ver_datos')}}">
+
+  <button type="submit" class="btn btn-primary">Ver datos</button>
+
+</form>
+<br>
+<br>
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul class="alert alert-warning" role="alert">
+  {% for message in messages %}
+  <li >{{ message }}</li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+
+
+ </body>
+ </html>
+
+
+ 
