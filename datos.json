@@ -2,19 +2,25 @@
     "tareas": [
         [
             null,
-            "Comprar"
+            "Comprar",
+            "Comprar",
+            null
         ]
     ],
     "correos": [
         [
             null,
-            "lparedez@espe.edu.ec"
+            "lparedez@espe.edu.ec",
+            "lparedez@espe.edu.ec",
+            null
         ]
     ],
     "prioridad": [
         [
             null,
-            "Baja"
+            "Media",
+            "Baja",
+            null
         ]
     ]
 }

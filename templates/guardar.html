@@ -10,25 +10,25 @@
 
  </head>
  <body>
-   <!-- Formulario de ingreso de tareas-->
- <h2>Formulario Nuevo elemento</h2>
+   <!-- Formulario de ingreso de tareas a almacenar-->
+ <h2 class="row justify-content-center align-items-center minh-100 mb-2 bg-danger text-white">Guardar Tarea</h2>
  <form method="POST" action="{{url_for('guardar')}}">
-   <div class="form-row">
+   <div class="form-row row justify-content-center align-items-center minh-100">
      <div class="form-group col-md-6">
        <label for="inputName">Tarea</label>
        <input type="text" class="form-control" name="tarea" id="inputName" placeholder="Tarea">
      </div>
    </div>
-   <div class="form-row">
+   <div class="form-row row justify-content-center align-items-center minh-100">
      <div class="form-group col-md-6">
        <label for="inputEmail4">Correo electrónico</label>
        <input type="email" class="form-control" name="correo" id="inputEmail4" placeholder="Correo electrónico">
      </div>
    </div>
 
-   <div class="form-row">
+   <div class="form-row row justify-content-center align-items-center minh-100">
 
-     <div class="form-group col-md-4">
+     <div class="form-group col-md-6">
        <label for="inputPrioridad">Prioridad</label>
        <select id="inputPrioridad" name="prioridad" class="form-control">
          <option selected>Baja</option>
@@ -38,13 +38,18 @@
      </div>
 
    </div>
-   <button type="submit" class="btn btn-primary">Guardar datos</button>
- </form>
- <br>
- <br>
- <form method="POST" action="{{url_for('ver_datos')}}">
 
-  <button type="submit" class="btn btn-primary">Ver datos</button>
+   <!-- Botón que envía los datos a un archivo json-->
+   <center>
+   <button type="submit" class="minh-100 btn mb-2 bg-danger text-white">Guardar datos</button>
+  </center>
+  </form>
+ <br>
+ <br>
+ <!-- Botón que permite visualizar mediante un mensaje flash los datos almacenados-->
+ <form method="POST" action="{{url_for('ver_datos')}}" class="row justify-content-center align-items-center minh-100">
+
+  <button type="submit" class="btn mb-2 bg-danger text-white">Ver datos</button>
 
 </form>
 <br>

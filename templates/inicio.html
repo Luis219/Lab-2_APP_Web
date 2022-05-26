@@ -11,27 +11,27 @@
   integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <body>
-  
+
 
 
   <!--Alerta en el caso de existir errores en el ingreso de los datos-->
 
-  
-    {% with messages = get_flashed_messages() %}
-    {% if messages %}
-    <ul class="alert alert-warning" role="alert">
-      {% for message in messages %}
-      <li >{{ message }}</li>
-      {% endfor %}
-    </ul>
-    {% endif %}
-    {% endwith %}
 
-  
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}
+  <ul class="alert alert-warning" role="alert">
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+  {% endwith %}
+
+
 
 
   <!-- Formulario de ingreso de tareas-->
-  <h2 class="row justify-content-center align-items-center minh-100">Formulario Nuevo elemento</h2>
+  <h2 class="row justify-content-center align-items-center minh-100 mb-2 bg-danger text-white">Ingreso de Tareas</h2>
   <form method="POST" action="{{url_for('enviar')}}">
     <div class="form-row row justify-content-center align-items-center minh-100">
       <div class="form-group col-md-6">
@@ -48,7 +48,7 @@
 
     <div class="form-row row justify-content-center align-items-center minh-100">
 
-      <div class="form-group col-md-4">
+      <div class="form-group col-md-6">
         <label for="inputPrioridad">Prioridad</label>
         <select id="inputPrioridad" name="prioridad" class="form-control">
           <option selected>Baja</option>
@@ -58,31 +58,33 @@
       </div>
 
     </div>
+    <!--Boton para agregar tarea a la tabla-->
     <center>
-      <button type="submit" class="btn btn-primary minh-100">Agregar a la tarea</button>
+      <button type="submit" class="btn mb-2 bg-danger text-white">Agregar a la tarea</button>
     </center>
-    
+
   </form>
   <br>
-  <br>
 
-<!--Boton borrar-->
+
+  <!--Formulario con Boton borrar-->
   <form method="POST" action="{{url_for('borrar')}}" class="row justify-content-center align-items-center minh-100">
 
-    <button type="submit" class="btn btn-primary ">Borrar</button>
+    <button type="submit" class="btn mb-2 bg-danger text-white">Borrar</button>
 
   </form>
   <br>
-  <br>
+  <!--Formulario con Boton Guardar que redirige a un nuevo formulario para ingresar las tareas que se van a almacenar-->
   <form method="POST" action="{{url_for('guardar')}}" class="row justify-content-center align-items-center minh-100">
 
-    <button type="submit" class="btn btn-primary center">Guardar</button>
+    <button type="submit" class="btn mb-2 bg-danger text-white">Guardar</button>
 
   </form>
   <br>
   <br>
   <!-- Tabla de tareas pendientes-->
-  <h2>Lista de Tareas Pendientes</h2>
+  <h2 class="row justify-content-center align-items-center minh-100 p-3 mb-2 bg-dark text-white">Lista de Tareas
+    Pendientes</h2>
   <table class="table table-hover table-dark ">
     <thead>
       <tr>
@@ -96,7 +98,7 @@
 
       <tr>
 
-
+        <!--Se recorre cada tarea y se plasma a modo de lista en una tabla-->
         <td>
           <u> {% for tarea in tareas %}
             <li>
@@ -105,7 +107,7 @@
             {% endfor %}
           </u>
         </td>
-
+        <!--Se recorre cada correo electronico y se plasma a modo de lista en una tabla-->
         <td>
           <u>
             {% for correo in correos %}
@@ -116,7 +118,7 @@
           </u>
         </td>
 
-
+        <!--Se recorre cada prioridad y se plasma a modo de lista en una tabla-->
         <td>
           <u>
             {% for prioridad in prioridades %}
@@ -126,7 +128,7 @@
             {% endfor %}
           </u>
         </td>
-        
+
 
       </tr>
 

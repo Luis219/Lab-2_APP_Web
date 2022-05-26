@@ -1,17 +1,16 @@
-#se importa escape de markupsafe
+#se importan las librerías que se van a utilizar en la aplicación
 
 import re
 import json
 import os
 from asyncio import mixins
 from markupsafe import escape
-
-#Se importa la librería Flask
 from flask import Flask, abort, redirect, render_template, request, flash, url_for
 
 #variable de instancia app
 app=Flask(__name__, template_folder='templates')
 
+#llave secreta para el funcionamiento de flash
 app.secret_key='12345'
 
 
@@ -22,7 +21,7 @@ app.secret_key='12345'
 def inicio():
     return render_template('inicio.html')
 
-
+#Listas que guardarán temporalmente las tareas, correos y prioridades
 tareas=[]
 correos=[]
 prioridades=[]
@@ -46,6 +45,7 @@ def enviar():
         correos.append(correo)
         prioridades.append(prioridad)
     else:
+        #alerta en caso de que existan errores
         flash('Error al ingresar los datos')
         return render_template('inicio.html')
  
@@ -63,9 +63,14 @@ def borrar():
 
     return render_template('inicio.html',tareas=tareas, correos=correos, prioridades= prioridades)
 
+'''
+La siguiente seccion corresponde al Crédito Extra I: Guardar Lista
+'''
+
+#ruta hacia la función /guardar
 @app.route('/guardar',methods=['POST'])
 
-#función que permite borrar las tareas de toda la tabla
+#función que permite guardar las tareas, correos, y prioridades de toda la tabla
 def guardar():
 
     tarea= request.form.get('tarea')
@@ -77,9 +82,10 @@ def guardar():
     prioridades.append(prioridad)
 
    
-  
+  #con path se especifica la ruta del archivo
     path, _=os.path.split(os.path.abspath(__file__))
     
+    #se crean los arreglos de tareas, correos y prioridades
     data={}
     data['tareas']=[]
     data['correos']=[]
@@ -89,7 +95,7 @@ def guardar():
     data["correos"].append(correos)
     data["prioridad"].append(prioridades)
 
-   
+   #se escribe en el archivo datos.json
     with open(path+f'/datos.json','w') as file:
         json.dump(data, file, indent=4)
 
@@ -98,12 +104,12 @@ def guardar():
 
 @app.route('/ver_datos',methods=['POST'])
 
-#función que permite borrar las tareas de toda la tabla
+#función que permite visualizar las tareas almacenadas
 def ver_datos():
     
     path, _=os.path.split(os.path.abspath(__file__))
     
-   
+   #se carga el archuvo datos.json
     with open(path+'/datos.json') as file:
        data= json.load(file)
     
